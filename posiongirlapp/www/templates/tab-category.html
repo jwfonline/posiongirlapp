@@ -1,0 +1,67 @@
+﻿<div ng-controller="CategoryCtrl">
+    <ion-view view-title="Category">
+
+        <ion-content>
+            <ion-header-bar class="bar-positive">
+                <h1 class="title">Category Name</h1>
+                <div class="buttons">
+                    <button class="button button-icon ion-compose" ng-click="openModal(1)"></button>
+                </div>
+            </ion-header-bar>
+            <br /><br />
+            <ion-list>
+                <ion-item ng-repeat="category in categories">
+                    <div class="row">
+                        <div class="col item-text-wrap">{{category.name}}</div>
+                        <div class="col "><button ng-click="ShowEdit(category)" class="button button-dark ion-edit"></button><button ng-click="ShowDelete(category)" class="button button-assertive ion-trash-a"></button></div>
+                       
+                            </div>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-view>
+   
+    <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">New Contact</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(1)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <label for="categoryname">Category Name</label>
+                    <input type="text" ng-model="category.name" id="categoryname" placeholder="Enter Category Name" value="">
+                    <button class="button button-full button-positive" ng-click="createCategoryName(category)">Create</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="templates/deletemodal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Delete Category</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(2)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <button ng-click="deleteCategory()" class="button button-full button-dark">Confirm Delete</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="templates/editmodal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Delete Category</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(3)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <label for="categoryname">Category Name</label>
+                    <input type="text" ng-model="categoryToEdit.name" id="categoryname" placeholder="Edit Category Name" value="">
+                    <button class="button button-full button-positive" ng-click="editCategoryName()">Edit</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</div>
