@@ -1,5 +1,5 @@
 ﻿<div ng-controller="TypeCtrl">
-    <ion-view view-title="Category">
+    <ion-view view-title="Type">
 
         <ion-content>
             <ion-header-bar class="bar-positive">
@@ -10,22 +10,16 @@
             </ion-header-bar>
             <br /><br />
             <div class="list">
-
-                <label class="item item-input item-select">
-                    <div class="input-label">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">
                         Category
-                    </div>
-
+                    </span>
                     <select ng-model="SelectedCategory" ng-options="category as category.name for category in categories">
                         <option value="0">Select Category</option>
-
-
                     </select>
                 </label>
-
             </div>
             <ion-list>
-                <ion-item>{{ SelectedCategory.id }}</ion-item>
                 <ion-item ng-repeat="type in types| filter:{ Category :  SelectedCategory.id}">
                     <div class="row">
                         <div class="col item-text-wrap">{{type.name}}</div>
@@ -33,13 +27,11 @@
                             <button ng-click="ShowEdit(type)" class="button button-dark ion-edit"></button>
                             <button ng-click="ShowDelete(type)" class="button button-assertive ion-trash-a"></button>
                         </div>
-
                     </div>
                 </ion-item>
             </ion-list>
         </ion-content>
     </ion-view>
-
     <script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive">
@@ -48,16 +40,14 @@
             </ion-header-bar>
             <ion-content class="padding">
                 <div class="list">
-                    <label class="item item-input item-select">
-                        <div class="input-label">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">
                             Category
-                        </div>
-                      
+                        </span>
                         <select ng-model="SelectedCategory" required ng-options="category as category.name for category in categories">
                             <option value="0">Select Category</option>
-
                         </select>
-                    </label>                    
+                    </label>
                     <label for="typename">Type Name</label>
                     <input type="text" ng-model="type.name" id="typename" placeholder="Enter Type Name" value="">
                     <button class="button button-full button-positive" ng-click="createTypeName(type , SelectedCategory.id)">Create</button>
@@ -87,18 +77,15 @@
             <ion-content class="padding">
                 <div class="list">
                     <label class="item item-input item-stacked-label">
-                       
-                            <span class="input-label title">  Category</span>
-
-                        <select ng-model="selectedCategory" required ng-options="category as category.name for category in categories" >
+                        <span class="input-label title">  Category</span>
+                        <select ng-model="selectedCategory" required ng-options="category as category.name for category in categories">
                             <option value="0">Select Category</option>
-
                         </select>
-                    </label> 
+                    </label>
                     <label class="item item-input " for="typename">
-                        <span class="input-label  title">Type Name</span>                            
-                            <input type="text" ng-model="typesToEdit.name" id="typename" placeholder="Edit Category Name" value="">
-</label>
+                        <span class="input-label  title">Type Name</span>
+                        <input type="text" ng-model="typesToEdit.name" id="typename" placeholder="Edit Category Name" value="">
+                    </label>
                     <button class="button button-full button-positive" ng-click="editTypeName(selectedCategory)">Edit</button>
                 </div>
             </ion-content>

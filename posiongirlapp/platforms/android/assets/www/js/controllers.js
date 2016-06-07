@@ -213,7 +213,7 @@ angular.module('starter.controllers', [])
         // edit category
         $scope.editWhiskey = function (sc) {
             $scope.whiskeyToEdit.Type = sc.id;
-            $scope.types.$update($scope.typesToEdit)
+            $scope.whiskeys.$update($scope.whiskeyToEdit)
             $scope.whiskeyToEdit = null;
             $scope.closeModal(3);
         };
@@ -258,17 +258,22 @@ angular.module('starter.controllers', [])
             $scope.openModal(2);
             $scope.whiskeysToDelete = u;
         };
-
+        //select the correct dropdown
         $scope.ShowEdit = function (u) {
             $scope.openModal(3);
             $scope.whiskeyToEdit = u;
             for (var i = 0; i < $scope.types.length; i++) {
                 if ($scope.types[i].id == u.Type) {
-                    $scope.SelectedType = $scope.types[i];
+                    $scope.selectedType = $scope.types[i];
                     break;
                 }
             };
-
+            for (var i = 0; i < $scope.categories.length; i++) {
+                if ($scope.categories[i].id == $scope.selectedType.Category) {
+                    $scope.selectedCategory = $scope.categories[i];
+                    break;
+                }
+            };
         };
     })
 
