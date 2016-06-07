@@ -1,0 +1,138 @@
+﻿<div ng-controller="WhiskeyCtrl">
+    <ion-view view-title="Whiskey & Liquor">
+        <ion-content>
+            <ion-header-bar class="bar-positive">
+                <h1 class="title">Whiskey Name</h1>
+                <div class="buttons">
+                    <button class="button button-icon ion-compose" ng-click="openModal(1)"></button>
+                </div>
+            </ion-header-bar>
+            <br /><br />
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Category
+                    </div>
+                    <select ng-model="SelectedCategory" ng-options="category as category.name for category in categories">
+                        <option value="0">Select Category</option>
+                    </select>
+                </label>
+            </div>
+            <div class="list">
+                <label class="item item-input item-stacked-label ">
+                    <span class="input-label title">
+                        Type
+</span>
+                    <select ng-model="SelectedType" ng-options="type as type.name for type in types | filter:{ Category :  SelectedCategory.id}">
+                        <option value="0">Select Type</option>
+                    </select>
+                </label>
+            </div>
+            <ion-list>
+                <ion-item>{{ SelectedCategory.id }}</ion-item>
+                <ion-item ng-repeat="whiskey in whiskeys| filter:{ Type :  SelectedType.id}">
+                    <div class="row">
+                        <div class="col item-text-wrap">{{whiskey.name}}</div>
+                        <div class="col ">
+                            <button ng-click="ShowEdit(whiskey)" class="button button-dark ion-edit"></button>
+                            <button ng-click="ShowDelete(whiskey)" class="button button-assertive ion-trash-a"></button>
+                        </div>
+
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-view>
+
+    <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">New Whiskey</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(1)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        
+                            <span class="input-label title"> Category</span>
+
+
+                        <select ng-model="SelectedCategory" required ng-options="category as category.name for category in categories">
+                            <option value="0">Select Category</option>
+
+                        </select>
+                    </label>
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <div class="input-label">
+                                Type
+                            </div>
+                            <select ng-model="SelectedType" ng-options="type as type.name for type in types | filter:{ Category :  SelectedCategory.id}">
+                                <option value="0">Select Type</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label for="typename">Whiskey Name</label>
+                    <input type="text" ng-model="whiskey.name" id="typename" placeholder="Enter Whiskey Name" value="">
+                    <label for="typename">Description</label>
+                    <input type="text" ng-model="whiskey.desc" id="typename" placeholder="Enter Whiskey Description" value="">
+                    <button class="button button-full button-positive" ng-click="createwhiskeyName(whiskey , SelectedType.id)">Create</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="templates/deletemodal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Delete Whiskey</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(2)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <button ng-click="deleteWhiskey()" class="button button-full button-dark">Confirm Delete</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+    <script id="templates/editmodal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Edit Type</h1>
+                <button class="button button-clear button-primary" ng-click="closeModal(3)">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+
+                        <span class="input-label title">  Category</span>
+
+                        <select ng-model="selectedCategory" required ng-options="category as category.name for category in categories">
+                            <option value="0">Select Category</option>
+
+                        </select>
+                    </label>
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
+                            <div class="input-label">
+                                Type
+                            </div>
+                            <select ng-model="SelectedType" ng-options="type as type.name for type in types | filter:{ Category :  SelectedCategory.id}">
+                                <option value="0">Select Type</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label class="item item-input " for="whiskeyname">
+                        <span class="input-label  title">Whiskey Name</span>
+                        <input type="text" ng-model="whiskeyToEdit.name" id="whiskeyname" placeholder="Edit Category Name" value="">
+                    </label>
+                    <label class="item item-input " for="desc">
+                        <span class="input-label  title">
+                            Description</span>
+                            <input type="text" ng-model="whiskeyToEdit.desc" id="desc" placeholder="Enter Whiskey Description" value="">
+</label>
+                    <button class="button button-full button-positive" ng-click="editTypeName(SelectedType)">Edit</button>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</div>

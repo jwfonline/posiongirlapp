@@ -1,5 +1,14 @@
 angular.module('starter.services', [])
 
+.service('DataTableService', function (firebaseCollection) {
+
+    this.categories = firebaseCollection('https://amber-inferno-837.firebaseio.com/Category');
+    this.types = firebaseCollection('https://amber-inferno-837.firebaseio.com/Type');
+    this.whiskeys = firebaseCollection('https://amber-inferno-837.firebaseio.com/whiskeys');
+
+})
+    
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

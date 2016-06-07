@@ -62,17 +62,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'TypeCtrl'
         }
       }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
+  })
+ .state('tab.whiskey', {
+          url: '/whiskey',
+          views: {
+              'tab-whiskey': {
+                  templateUrl: 'templates/tab-whiskey.html',
+                  controller: 'WhiskeyCtrl'
+              }
+          }
+      })
  
    .state('tab.category', {
       url: '/category',
